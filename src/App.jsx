@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { ChefHat, Fish, Leaf, UtensilsCrossed, Globe, Star, MapPin, Phone, Clock, X, Send, Navigation, Instagram, Facebook } from 'lucide-react';
 
 // --- GALERÍA DE IMÁGENES DE PRUEBA (Enlaces Verificados) ---
@@ -248,7 +248,7 @@ function App() {
   );
 }
 
-const Header = ({ lang, toggleLang }) => (
+const Header = ({ toggleLang }) => (
     <header className="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" className="text-2xl font-bold text-[#03254E] flex items-center gap-2">
