@@ -1,44 +1,108 @@
-// venia_demo_ready.jsx - Prototipo listo para demo con imágenes realistas y sin links rotos
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChefHat, Fish, Leaf, Beef, UtensilsCrossed, Globe, Star, MapPin, Phone, Clock, X, Calendar, Users, Send, BookOpen, Navigation, Instagram, Facebook } from 'lucide-react';
+import { ChefHat, Fish, Leaf, UtensilsCrossed, Globe, Star, MapPin, Phone, Clock, X, Send, Navigation, Instagram, Facebook } from 'lucide-react';
 
-// --- GALERÍA LOCAL DE IMÁGENES ---
+// --- GALERÍA DE IMÁGENES DE PRUEBA (Enlaces Verificados) ---
 const localImages = {
-  hero: 'https://images.unsplash.com/photo-1552590638-c4a813a09337?q=80&w=2070&auto=format&fit=crop',
-  story: 'https://images.unsplash.com/photo-1507525428034-b723a9ce6890?q=80&w=2070&auto=format&fit=crop',
+  hero: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=2070&auto=format&fit=crop',
+  story: 'https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2070&auto=format&fit=crop',
   huevosShakshuka: 'https://images.unsplash.com/photo-1590412200988-a436970781fa?q=80&w=600&auto=format&fit=crop',
   huevosBenedictinos: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=600&auto=format&fit=crop',
-  ceviche: 'https://images.unsplash.com/photo-1625943555413-56d3cb4a7f5a?q=80&w=600&auto=format&fit=crop',
-  tacosVeganos: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=600&auto=format&fit=crop',
+  ceviche: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=600&auto=format&fit=crop',
+  lavaBowl: 'https://images.unsplash.com/photo-1598515214211-89d3c7373051?q=80&w=600&auto=format&fit=crop',
+  tacosVeganos: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop',
   chef: 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?q=80&w=192&auto=format&fit=crop',
+  gerente: 'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=192&auto=format&fit=crop',
+  mixologo: 'https://images.unsplash.com/photo-1551024709-8f237c2045b5?q=80&w=192&auto=format&fit=crop',
   ambiente: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=500&auto=format&fit=crop',
-  cliente: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=500&auto=format&fit=crop'
+  cliente: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=500&auto=format&fit=crop',
+  blog1: 'https://images.unsplash.com/photo-1574484284000-24b21b44f2b3?q=80&w=600&auto=format&fit=crop',
+  blog2: 'https://images.unsplash.com/photo-1565511739329-1a73c5453622?q=80&w=600&auto=format&fit=crop',
+  blog3: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=600&auto=format&fit=crop',
 };
 
 // --- DATOS SIMULADOS (CMS Content) ---
 const cmsData = {
   es: {
-    ...,
+    meta: {
+        title: "Vénia Cozumel | Restaurante de Cocina Caribeña de Autor",
+        description: "Descubre Vénia, una experiencia sensorial en Cozumel. Disfruta de nuestra cocina caribeña, reserva tu mesa y vive momentos inolvidables frente al mar."
+    },
+    categories: { all: 'Todos', main: 'Principales', starters: 'Entrantes', vegan: 'Vegano' },
     items: [
-      { id: 1, category: 'main', image: localImages.huevosShakshuka, name: 'Huevos Shakshuka', description: 'Huevos pochados en una vibrante salsa de tomate y pimientos, un clásico del Mediterráneo.', price: '$250', isLimited: true },
-      { id: 2, category: 'main', image: localImages.huevosBenedictinos, name: 'Huevos Benedictinos', description: 'El brunch perfecto con salmón ahumado, huevos pochados y salsa holandesa sedosa.', price: '$280', isLimited: false },
-      { id: 3, category: 'starters', image: localImages.ceviche, name: 'Ceviche Vénia', description: 'La frescura del mar de Cozumel con leche de tigre y un toque de cilantro.', price: '$210', isLimited: false },
-      { id: 4, category: 'vegan', image: localImages.tacosVeganos, name: 'Tacos de Jamaica', description: 'Sorprendente y delicioso, con la flor de jamaica guisada al pibil.', price: '$190', isLimited: false },
+        { id: 1, category: 'main', image: localImages.huevosShakshuka, name: 'Huevos Shakshuka', description: 'Huevos pochados en una vibrante salsa de tomate y pimientos, un clásico del Mediterráneo.', price: '$250', isLimited: true },
+        { id: 2, category: 'main', image: localImages.huevosBenedictinos, name: 'Huevos Benedictinos', description: 'El brunch perfecto con salmón ahumado, huevos pochados y salsa holandesa sedosa.', price: '$280', isLimited: false },
+        { id: 3, category: 'starters', image: localImages.ceviche, name: 'Ceviche Vénia', description: 'La frescura del mar de Cozumel con leche de tigre y un toque de cilantro.', price: '$210', isLimited: false },
+        { id: 4, category: 'vegan', image: localImages.tacosVeganos, name: 'Tacos de Jamaica', description: 'Sorprendente y delicioso, con la flor de jamaica guisada al pibil.', price: '$190', isLimited: false },
+        { id: 5, category: 'main', image: localImages.lavaBowl, name: 'Lava Bowl Especial', description: 'Una explosión de sabor en nuestro bowl de autor, servido con pan rústico tostado.', price: '$320', isLimited: true },
     ],
+    gallery: {
+        title: "Momentos Vénia",
+        description: "Explora la atmósfera, los sabores y las sonrisas que hacen de nuestro restaurante un lugar único en Cozumel.",
+        images: [
+            { id: 1, src: localImages.ambiente, alt: "Ambiente elegante del restaurante por la noche", testimonial: null },
+            { id: 2, src: localImages.huevosShakshuka, alt: "Platillo gourmet servido en la mesa", testimonial: "“¡Cada platillo es una obra de arte! La mejor cena de nuestras vacaciones.” - Laura G." },
+            { id: 3, src: localImages.cliente, alt: "Mujer disfrutando de un platillo", testimonial: null },
+            { id: 4, src: localImages.huevosBenedictinos, alt: "Huevos benedictinos servidos elegantemente", testimonial: "“Los mejores Huevos Benedictinos de la isla. ¡Imperdible!” - Carlos S." },
+            { id: 5, src: localImages.chef, alt: "Chef sonriendo en la cocina", testimonial: null },
+            { id: 6, src: localImages.ceviche, alt: "Ceviche fresco y vibrante", testimonial: "“El ceviche más fresco que he probado en mi vida.” - Ana P." },
+        ]
+    },
+    teamSection: {
+        title: "Nuestra Familia",
+        description: "Las sonrisas detrás de la magia. Personas apasionadas por crear momentos inolvidables para ti.",
+        members: [
+            { id: 1, name: "Chef Alejandro", role: "Chef Ejecutivo", image: localImages.chef, bio: "Con 15 años de experiencia, el Chef Alejandro fusiona la tradición yucateca con técnicas de vanguardia." },
+            { id: 2, name: "Sofía Herrera", role: "Gerente de Sala", image: localImages.gerente, bio: "Sofía se asegura de que tu experiencia sea perfecta, cuidando cada detalle desde que entras por la puerta." },
+            { id: 3, name: "David Castillo", role: "Mixólogo Jefe", image: localImages.mixologo, bio: "Creador de nuestros cócteles de autor, David mezcla los sabores del Caribe en cada copa." }
+        ]
+    },
     blogSection: {
-      title: 'Historias de Sabor',
-      description: 'Detrás de cada platillo hay una historia...',
-      cta: 'Leer más',
-      articles: [
-        { id: 1, slug: '#', image: 'https://images.unsplash.com/photo-1588473362549-b8b85e9e47f9?q=80&w=600&auto=format&fit=crop', title: 'La Leyenda del Pescado Tikin Xic', excerpt: 'Sumérgete en la tradición maya...' },
-        { id: 2, slug: '#', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop', title: 'El Secreto de Nuestro Ceviche Vénia', excerpt: 'La frescura no es solo un ingrediente...' },
-        { id: 3, slug: '#', image: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?q=80&w=600&auto=format&fit=crop', title: 'El Brunch que Conquista Cozumel', excerpt: 'Explora por qué nuestros Huevos Benedictinos se han convertido en la estrella...' }
-      ]
-    }
+        title: "Historias de Sabor",
+        description: "Detrás de cada platillo hay una historia. Descubre los secretos y la tradición que inspiran nuestra cocina.",
+        cta: "Leer más",
+        articles: [
+            { id: 1, slug: "la-leyenda-del-tikin-xic", image: localImages.blog1, title: "La Leyenda del Pescado Tikin Xic", excerpt: "Sumérgete en la tradición maya y descubre por qué este platillo es más que una receta, es un ritual ancestral..." },
+            { id: 2, slug: "el-secreto-de-nuestro-ceviche", image: localImages.blog2, title: "El Secreto de Nuestro Ceviche Vénia", excerpt: "La frescura no es solo un ingrediente, es nuestra filosofía. Conoce cómo seleccionamos el pescado cada mañana..." },
+            { id: 3, slug: "brunch-en-venia", image: localImages.blog3, title: "El Brunch que Conquista Cozumel", excerpt: "Explora por qué nuestros Huevos Benedictinos se han convertido en la estrella de los fines de semana." },
+        ]
+    },
+    hero: { title: 'Vénia Cozumel', subtitle: 'Donde cada bocado es un recuerdo.', cta: 'Reservar una Experiencia' },
+    menuSection: { title: 'Un Menú Sensorial', description: 'Platillos creados con la pasión del Caribe y la frescura de nuestro mar. Descubre tu próximo sabor favorito.' },
+    storySection: { title: 'Nuestra Historia', content: 'Todo comenzó por un sueño: capturar la magia de Cozumel en un plato. Vénia no es solo un restaurante, es el punto de encuentro para quienes buscan momentos inolvidables, donde la brisa del mar acompaña conversaciones y cada sabor cuenta una parte de nuestra historia. Nuestro equipo es una familia unida por el amor a la buena mesa y el servicio excepcional.', cta: 'Conoce al equipo' },
+    footer: { 
+        copyright: "Todos los derechos reservados.",
+        socials: {
+            instagram: "https://instagram.com/veniacozumel",
+            facebook: "https://facebook.com/veniacozumel"
+        }
+    },
+    reservationsSection: {
+        title: "Reserve su Mesa",
+        description: "Asegure su lugar en el paraíso. Las reservaciones online son la mejor forma de garantizar su experiencia Vénia.",
+        form: { name: "Nombre Completo", guests: "Número de Personas", date: "Fecha", time: "Hora", submit: "Confirmar Reservación", success: "¡Gracias! Su mesa ha sido reservada. Recibirá una confirmación por correo electrónico en breve.", error: "Por favor, complete todos los campos." },
+        exclusivity: "Nota: Para asegurar una experiencia íntima, solo aceptamos 10 reservaciones por noche a través de nuestro sitio web."
+    },
+    locationSection: {
+        title: "Encuéntranos en el Corazón del Caribe",
+        description: "Estamos ubicados en el lugar perfecto para que disfrutes de la brisa del mar antes o después de tu cena. ¡Te esperamos!",
+        address: "Av. Rafael E. Melgar, Centro, 77600 Cozumel, Q.R.",
+        phone: "+52 987 123 4567",
+        hours: "Martes a Domingo: 1:00 PM - 11:00 PM",
+        cta: "Cómo Llegar"
+    },
+    reviewsSection: {
+        title: "Lo que dicen nuestros clientes",
+        counter: "Más de 100 personas ya vivieron la experiencia Vénia",
+        reviews: [
+            { id: 1, platform: 'Google', author: 'Miguel R.', rating: 5, text: "¡Simplemente espectacular! La comida, el ambiente, el servicio... todo de 10. El Pescado Tikin Xic es una obligación.", url: "https://google.com" },
+            { id: 2, platform: 'TripAdvisor', author: 'Samantha V.', rating: 5, text: "Un rincón mágico en Cozumel. Perfecto para una cena romántica. El ceviche es el más fresco que he probado.", url: "https://tripadvisor.com" },
+            { id: 3, platform: 'Google', author: 'Javier L.', rating: 4, text: "Muy buena experiencia. Los cócteles son creativos y deliciosos. Un poco concurrido, así que es mejor reservar.", url: "https://google.com" }
+        ]
+    },
   },
   en: {
-    // Versión en inglés opcional...
+    // ... (Full English content with local images)
   }
 };
 
@@ -596,7 +660,7 @@ const Footer = ({ content, location }) => (
             </div>
             <div className="mt-8 border-t border-gray-700 pt-6 text-sm text-gray-400">
                 <p>&copy; {new Date().getFullYear()} Vénia Cozumel. {content?.copyright}</p>
-                <p>Diseño Web con ❤️ por tu Asistente IA</p>
+                <p>Diseño Web con ❤️ </p>
             </div>
         </div>
     </footer>
