@@ -1,4 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Puedes agregar aquí tus propios estilos si quieres */
+
+body {
+  @apply font-sans bg-gradient-to-br from-[#F3E9D2] via-[#e0f7fa] to-[#e0e7ff] text-[#03254E] min-h-screen;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}

@@ -249,27 +249,27 @@ function App() {
 }
 
 const Header = ({ toggleLang }) => (
-    <header className="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md">
-      <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold text-[#03254E] flex items-center gap-2">
-            <ChefHat className="text-[#00A6A6]" /> Vénia
-        </a>
-        <div className="hidden md:flex items-center gap-6">
-          <a href="#menu" className="hover:text-[#00A6A6] transition-colors">Menu</a>
-          <a href="#story" className="hover:text-[#00A6A6] transition-colors">Nosotros</a>
-          <a href="#gallery" className="hover:text-[#00A6A6] transition-colors">Galería</a>
-          <a href="#reviews" className="hover:text-[#00A6A6] transition-colors">Reseñas</a>
-          <a href="#blog" className="hover:text-[#00A6A6] transition-colors">Blog</a>
-          <a href="#location" className="hover:text-[#00A6A6] transition-colors">Contacto</a>
-        </div>
-        <div className="flex items-center gap-2">
-            <a href="#reservations" className="px-4 py-2 bg-[#00A6A6] text-white font-semibold rounded-full hover:bg-teal-600 transition-colors text-sm">Reservar</a>
-            <button onClick={toggleLang} className="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Change language">
-                <Globe size={20} />
-            </button>
-        </div>
-      </nav>
-    </header>
+  <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl shadow-xl border-b border-white/30">
+    <nav className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <a href="#" className="text-3xl font-extrabold tracking-tight text-[#03254E] flex items-center gap-3 drop-shadow-lg">
+        <ChefHat className="text-[#00A6A6] scale-110" /> Vénia
+      </a>
+      <div className="hidden md:flex items-center gap-8">
+        <a href="#menu" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Menú</a>
+        <a href="#story" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Nosotros</a>
+        <a href="#gallery" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Galería</a>
+        <a href="#reviews" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Reseñas</a>
+        <a href="#blog" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Blog</a>
+        <a href="#location" className="hover:text-[#00A6A6] font-semibold text-lg transition-colors">Contacto</a>
+      </div>
+      <div className="flex items-center gap-3">
+        <a href="#reservations" className="px-5 py-2 bg-gradient-to-r from-[#00A6A6] to-[#32e2b8] text-white font-bold rounded-full shadow-lg hover:from-teal-600 hover:to-cyan-500 transition-colors text-base">Reservar</a>
+        <button onClick={toggleLang} className="p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="Change language">
+          <Globe size={22} />
+        </button>
+      </div>
+    </nav>
+  </header>
 );
 
 const HeroSection = ({ content }) => (
@@ -302,60 +302,97 @@ const MenuSection = ({ content }) => {
   const categoryIcons = { all: <UtensilsCrossed size={20} />, main: <Fish size={20} />, starters: <ChefHat size={20} />, vegan: <Leaf size={20} /> };
 
   return (
-    <TexturedBackground id="menu" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <motion.div {...fadeIn} className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#03254E]">{content.menuSection?.title}</h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">{content.menuSection?.description}</p>
+    <section id="menu" className="py-24 bg-white relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-60" style={{backgroundImage: `url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2303254E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`, backgroundRepeat: 'repeat'}}></div>
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div {...fadeIn} className="text-center mb-14">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-[#03254E] drop-shadow-lg tracking-tight">{content.menuSection?.title}</h2>
+          <p className="mt-5 text-xl text-gray-600 max-w-2xl mx-auto font-medium">{content.menuSection?.description}</p>
         </motion.div>
-        <motion.div {...fadeIn} className="flex justify-center flex-wrap gap-3 mb-12">
+        <motion.div {...fadeIn} className="flex justify-center flex-wrap gap-4 mb-14">
           {content.categories && Object.entries(content.categories).map(([key, value]) => (
-            <button key={key} onClick={() => setActiveCategory(key)} className={`px-4 py-2 flex items-center gap-2 rounded-full text-sm font-semibold transition-all duration-300 ${ activeCategory === key ? 'bg-[#00A6A6] text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }`}>
+            <button key={key} onClick={() => setActiveCategory(key)} className={`px-6 py-2 flex items-center gap-2 rounded-full text-base font-bold transition-all duration-300 shadow-md border-2 ${ activeCategory === key ? 'bg-gradient-to-r from-[#00A6A6] to-[#32e2b8] text-white border-[#00A6A6]' : 'bg-white/80 text-[#03254E] border-gray-200 hover:bg-[#e0f7fa]' }`}>
               {categoryIcons[key]} {value}
             </button>
           ))}
         </motion.div>
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <AnimatePresence>{filteredItems.map(item => <MenuCard key={item.id} item={item} />)}</AnimatePresence>
         </motion.div>
       </div>
-    </TexturedBackground>
+    </section>
   );
 };
 
 const MenuCard = ({ item }) => (
-    <motion.div layout initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.4, ease: 'easeInOut' }} whileHover={{ y: -10, boxShadow: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04)" }} className="bg-white rounded-2xl shadow-lg overflow-hidden group">
-      <div className="relative">
-        <img src={item.image} alt={`[Imagen de ${item.name}]`} className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="600" height="400" />
-        {item.isLimited && ( <div className="absolute top-4 right-4 bg-[#00A6A6] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1"><Star size={14} /> Edición Limitada</div> )}
-      </div>
-      <div className="p-6">
-        <h3 className="text-2xl font-bold text-[#03254E]">{item.name}</h3>
-        <p className="mt-2 text-gray-600">{item.description}</p>
-        <p className="mt-4 text-xl font-semibold text-[#00A6A6]">{item.price}</p>
-      </div>
-    </motion.div>
+  <motion.div
+    layout
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.8 }}
+    transition={{ duration: 0.4, ease: 'easeInOut' }}
+    whileHover={{ y: -12, scale: 1.03, boxShadow: "0px 30px 40px -10px rgba(0, 166, 166, 0.15), 0px 10px 20px -5px rgba(3, 37, 78, 0.08)" }}
+    className="bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group border border-white/40 transition-all duration-300"
+  >
+    <div className="relative">
+      <img
+        src={item.image}
+        alt={`[Imagen de ${item.name}]`}
+        className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        width="600"
+        height="400"
+      />
+      {item.isLimited && (
+        <div className="absolute top-4 right-4 bg-gradient-to-r from-[#00A6A6] to-[#32e2b8] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+          <Star size={14} /> Edición Limitada
+        </div>
+      )}
+    </div>
+    <div className="p-7">
+      <h3 className="text-2xl font-extrabold text-[#03254E] drop-shadow-sm">{item.name}</h3>
+      <p className="mt-3 text-gray-700 font-medium">{item.description}</p>
+      <p className="mt-5 text-xl font-bold text-[#00A6A6]">{item.price}</p>
+    </div>
+  </motion.div>
 );
 
 const StorySection = ({ content }) => (
-    <section id="story" className="relative py-24 md:py-32 bg-gray-800" style={{ backgroundImage: `url(${localImages.story})`, backgroundAttachment: 'fixed', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <div className="container mx-auto px-6 relative z-20 text-white text-center">
-            <motion.div 
-                initial={{ opacity: 0, y: 50 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 0.8 }}
-                className="bg-black/30 backdrop-blur-md p-8 md:p-12 rounded-2xl max-w-3xl mx-auto"
-            >
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h2>
-                <p className="text-lg md:text-xl leading-relaxed mb-6">{content.content}</p>
-                <motion.a href="#team" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-6 py-3 bg-[#00A6A6] text-white font-bold rounded-full transition-colors hover:bg-teal-500">
-                    {content.cta}
-                </motion.a>
-            </motion.div>
-        </div>
-    </section>
+  <section
+    id="story"
+    className="relative py-28 md:py-40 flex items-center justify-center min-h-[60vh]"
+    style={{
+      backgroundImage: `linear-gradient(rgba(3,37,78,0.7),rgba(0,166,166,0.5)), url(${localImages.story})`,
+      backgroundAttachment: 'fixed',
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+    }}
+  >
+    <div className="container mx-auto px-6 relative z-20 text-white text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="bg-white/10 backdrop-blur-xl p-10 md:p-16 rounded-3xl max-w-3xl mx-auto shadow-2xl border border-white/20"
+      >
+        <h2 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg tracking-tight text-white">
+          {content.title}
+        </h2>
+        <p className="text-xl md:text-2xl leading-relaxed mb-8 text-white/90 font-medium">
+          {content.content}
+        </p>
+        <motion.a
+          href="#team"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-8 py-4 bg-gradient-to-r from-[#00A6A6] to-[#32e2b8] text-white font-bold rounded-full shadow-lg transition-colors hover:from-teal-600 hover:to-cyan-500 text-lg"
+        >
+          {content.cta}
+        </motion.a>
+      </motion.div>
+    </div>
+  </section>
 );
 
 const TeamSection = ({ content }) => {
@@ -395,24 +432,38 @@ const TeamMemberCard = ({ member }) => (
 );
 
 const GallerySection = ({ content, setSelectedImg }) => (
-    <TexturedBackground id="gallery" className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-            <motion.div {...fadeIn} className="text-center mb-12">
-                <h2 className="text-4xl md:text-5xl font-bold text-[#03254E]">{content.title}</h2>
-                <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">{content.description}</p>
-            </motion.div>
-            <motion.div className="grid grid-cols-2 md:grid-cols-3 gap-4" initial="hidden" whileInView="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }} viewport={{ once: true }}>
-                {content.images?.map((img) => (
-                    <motion.div key={img.id} className="relative rounded-lg overflow-hidden cursor-pointer group shadow-lg" onClick={() => setSelectedImg(img)} variants={fadeIn} whileHover={{ scale: 1.03, zIndex: 10 }}>
-                        <img src={img.src} alt={img.alt} className="w-full h-full object-cover aspect-square" loading="lazy" width="500" height="500" />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 text-center">
-                           {img.testimonial && <p className="text-white text-sm font-semibold">"{img.testimonial}"</p>}
-                        </div>
-                    </motion.div>
-                ))}
-            </motion.div>
-        </div>
-    </TexturedBackground>
+  <section id="gallery" className="py-24 bg-white relative overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none opacity-60" style={{backgroundImage: `url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2303254E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`, backgroundRepeat: 'repeat'}}></div>
+    <div className="container mx-auto px-6 relative z-10">
+      <motion.div {...fadeIn} className="text-center mb-14">
+        <h2 className="text-5xl md:text-6xl font-extrabold text-[#03254E] drop-shadow-lg tracking-tight">{content.title}</h2>
+        <p className="mt-5 text-xl text-gray-600 max-w-2xl mx-auto font-medium">{content.description}</p>
+      </motion.div>
+      <motion.div className="grid grid-cols-2 md:grid-cols-3 gap-7" initial="hidden" whileInView="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }} viewport={{ once: true }}>
+        {content.images?.map((img) => (
+          <motion.div
+            key={img.id}
+            className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-xl border border-white/40 bg-white/60 backdrop-blur-xl transition-all duration-300"
+            onClick={() => setSelectedImg(img)}
+            variants={fadeIn}
+            whileHover={{ scale: 1.04, zIndex: 10 }}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="500"
+              height="500"
+            />
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 text-center">
+              {img.testimonial && <p className="text-white text-base font-semibold drop-shadow-lg">"{img.testimonial}"</p>}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  </section>
 );
 
 const FloatingBlobs = () => (
